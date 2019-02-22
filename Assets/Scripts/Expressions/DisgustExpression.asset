@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b03d0868c48fa5438d7253ae8b88f2d, type: 3}
   m_Name: DisgustExpression
   m_EditorClassIdentifier: 
-  name: Disgust
-  expressionImage: {fileID: 21300000, guid: 3582f047e9a1d81488a77b652ada34e9, type: 3}
+  ExpressionName: Disgust
+  ImageContent: {fileID: 21300000, guid: 3582f047e9a1d81488a77b652ada34e9, type: 3}

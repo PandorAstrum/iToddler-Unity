@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b03d0868c48fa5438d7253ae8b88f2d, type: 3}
   m_Name: AngerExpression
   m_EditorClassIdentifier: 
-  name: Anger
-  expressionImage: {fileID: 21300000, guid: 6f1c2d7821cc39549b1bbe1ee2a6f682, type: 3}
+  ExpressionName: Anger
+  ImageContent: {fileID: 21300000, guid: 6f1c2d7821cc39549b1bbe1ee2a6f682, type: 3}

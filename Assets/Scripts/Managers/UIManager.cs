@@ -3,57 +3,87 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using PandorAstrum.States;
+using PandorAstrum.Framework;
+using PandorAstrum.Utility;
 
 namespace PandorAstrum.UI
 {
-    public class PA_UISystem : MonoBehaviour {
+    public class UIManager : MonoBehaviour, IManager{
+        public ManagerState currentState { get; private set;}
+        public PA_UIScreen PreviousScreen{get{return previousScreen;}}
+        public PA_UIScreen CurrentScreen{get{return currentScreen;}}
 
-	#region public variable ==============================================
-
-        [Header("Main Properties")]
+		[Header("Main Properties")]
         public PA_UIScreen m_StartScreen; // first screen to appear
-        public PandorAstrum.Utility.Expressions[] expressions;
-        public PandorAstrum.Utility.Games[] games;
-        [Header("Fade Properties")]
-        public Image m_Fader;
-        public float m_FadeInDuration = 1.0f;
-        public float m_FadeOutDuration = 1.0f;
         [Header("System Events")]
         public UnityEvent onSwitchedScreen = new UnityEvent(); // swtich event
         public Component[] m_Screens = new Component[0]; // list of screens
         public Component[] m_Popups = new Component[0];
+        private PA_UIScreen previousScreen; // previous screen
+        private PA_UIScreen currentScreen; // current screen
+        public PA_UISnapScrolling[] m_ScrollSnap = new PA_UISnapScrolling[0];
+
+        private GlobalController _global;
+		public void BootSequence()
+		{
+            
+            // _global.expressions.Length
+            m_Screens = GetComponentsInChildren<PA_UIScreen>(true); // get all the screens
+            m_Popups = GetComponentsInChildren<PA_UIPopup>(true); // get all the pop ups
+            m_ScrollSnap = GetComponentsInChildren<PA_UISnapScrolling>(true); // get all the pop ups
+            // todo:provide scriptable objects to every scroll rect;
+            // todo:set up the ui as found in save get notification from save and settings
+            _global = GameObject.FindGameObjectWithTag("Global Controller").GetComponent<GlobalController>();
+            if(_global){
+                for (int i = 0; i < m_ScrollSnap.Length; i++)
+                {
+                    if (m_ScrollSnap[i].name == "Content_album"){
+                        m_ScrollSnap[i].Setup(_global.albums);
+                    } else if (m_ScrollSnap[i].name == "Content_profile") {
+                        m_ScrollSnap[i].Setup(_global.profiles);
+                    } else if (m_ScrollSnap[i].name == "Content_expression"){
+                        m_ScrollSnap[i].Setup(_global.expressions);
+                    } else if (m_ScrollSnap[i].name == "Content_Game") {
+                        m_ScrollSnap[i].Setup(_global.games);
+                    }
+                    
+                }
+            }
+            SwitchScreen(m_StartScreen, false);
+		}
+
+	#region public variable ==============================================
+
+        
+        
+        
 	
     #endregion ===========================================================
 
 	#region private variable =============================================
         
-        private PA_UIScreen previousScreen; // previous screen
-        private PA_UIScreen currentScreen; // current screen
+        
         private bool mainScreen = false; 
     
     #endregion ===========================================================
 
     #region property =====================================================
     
-        public PA_UIScreen PreviousScreen{get{return previousScreen;}}
-        public PA_UIScreen CurrentScreen{get{return currentScreen;}}
+        
     
     #endregion ===========================================================
 
 	#region main methods =================================================
 	// Use this for initialization
-	    void Start () {
+	    // void Start () {
 
-		    m_Screens = GetComponentsInChildren<PA_UIScreen>(true); // get all the screens
-            m_Popups = GetComponentsInChildren<PA_UIPopup>(true); // get all the pop ups
+		    
             
-            if (m_Fader) {
-                m_Fader.gameObject.SetActive(true);
-            }
             
-            SwitchScreen(m_StartScreen, false);
-            FadeIn();
-	    }
+            
+
+	    // }
 
     #endregion ===========================================================
 
@@ -103,17 +133,6 @@ namespace PandorAstrum.UI
             yield return null;
         }
 
-        public void FadeIn() {
-            if (m_Fader) {
-                m_Fader.CrossFadeAlpha(0f, m_FadeInDuration, false);
-            }
-        }
-
-        public void FadeOut() {
-            if (m_Fader) {
-                m_Fader.CrossFadeAlpha(0f, m_FadeOutDuration, false);
-            }
-        }
 
 	#endregion
     }

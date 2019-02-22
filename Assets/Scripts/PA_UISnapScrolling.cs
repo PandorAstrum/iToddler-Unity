@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Collections.Generic;
+using System.Collections;
+using PandorAstrum.States;
 
 namespace PandorAstrum.UI
 {
@@ -18,7 +21,7 @@ namespace PandorAstrum.UI
         [Header("Fill up Info")]
         public GameObject panPrefab;
         public ScrollRect scrollRect;
-        public PandorAstrum.UI.PA_UISystem uISystem;
+        // public PandorAstrum.UI.PA_UISystem uISystem;
         private int panCount = 6;
         private GameObject[] instPans;
         private Vector2[] pansPos;
@@ -29,29 +32,22 @@ namespace PandorAstrum.UI
  
         private int selectedPanID;
         private bool isScrolling;
- 
-        private void Start () {
-            // PandorAstrum.Utility.Displayer _displayer = GetComponent<PandorAstrum.Utility.Displayer>();
-            // _displayer.GetScriptableObject();
-            // panCount = _displayer._g.Length;
-            
-            // _displayer.Set(10);
-            // int s = _displayer.GetAs<int>();
 
+        public void Setup(I_Scriptable[] _sccirptable){
+            panCount = _sccirptable.Length;
             contentRect = GetComponent<RectTransform>();
             instPans = new GameObject[panCount];
             pansPos = new Vector2[panCount];
             pansScale = new Vector2[panCount];
-
+            
             for (int i = 0; i < panCount; i++) {
 
                 instPans[i] = Instantiate(panPrefab, transform, false);
 
-                // Text nameText = instPans[i].GetComponentInChildren<Text>();
-                // Image expressionImage = instPans[i].transform.Find("placeholder_image").GetComponent<Image>();
-                // nameText.text = _displayer.expressions[i].name;
-                // expressionImage.sprite = _displayer.expressions[i].expressionImage;
-
+                Text nameText = instPans[i].GetComponentInChildren<Text>();
+                Image expressionImage = instPans[i].transform.Find("placeholder_image").GetComponent<Image>();
+                nameText.text = _sccirptable[i].name;
+                expressionImage.sprite = _sccirptable[i].contentImage;
 
                 if (i == 0) continue;
                 instPans[i].transform.localPosition = new Vector2(instPans[i-1].transform.localPosition.x + panPrefab.GetComponent<RectTransform>().sizeDelta.x + panOffset,
@@ -59,6 +55,13 @@ namespace PandorAstrum.UI
                 pansPos[i] = -instPans[i].transform.localPosition;
             }
             contentRect.anchoredPosition = new Vector2(0f, 0f);
+        }
+        private void Start () {
+            // PandorAstrum.Utility.Displayer _displayer = GetComponent<PandorAstrum.Utility.Displayer>();
+
+
+            
+
         }
  
         private void FixedUpdate()
@@ -110,11 +113,11 @@ namespace PandorAstrum.UI
             }
         }
 
-        public void GetSelection(){
+        public void GetSelection() {
             // get all the game screen in a list
-            if (uISystem){
-                // GameObject[] gamescreens = ;
-            }
+            // if (uISystem){
+            //     // GameObject[] gamescreens = ;
+            // }
             
             // uISystem.SwitchScreen()
         }

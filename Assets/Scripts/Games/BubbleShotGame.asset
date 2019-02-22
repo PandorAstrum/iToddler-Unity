@@ -11,5 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b692973c7d034d44d9f797de6196a90f, type: 3}
   m_Name: BubbleShotGame
   m_EditorClassIdentifier: 
-  name: 
-  expressionImage: {fileID: 0}
+  GameName: Bubble Shot
+  ImageContent: {fileID: 21300000, guid: 6f1c2d7821cc39549b1bbe1ee2a6f682, type: 3}
+  GameLevel: 3
