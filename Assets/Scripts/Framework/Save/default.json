@@ -1,0 +1,62 @@
+{
+    "Albums": [
+      { "_id": 1,
+        "name": "Amar bondhu rashed",
+        "pics":[
+          { "pics_id": 1,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          },
+          {"pics_id": 2,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          },
+          {"pics_id": 3,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          },
+          {"pics_id": 4,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          }
+        ]
+      },
+      { "_id": 2,
+        "name": "harry potter",
+        "pics":[
+          { "pics_id": 1,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          },
+          {"pics_id": 2,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          },
+          {"pics_id": 3,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          },
+          {"pics_id": 4,
+            "pics_name" : "Name of the pics",
+            "pics_path": "full path string"
+          }
+        ]
+      }
+    ],
+    "Settings": {
+      "sound": true,
+      "music": true,
+      "language": "en"
+    },
+    "Users": [
+      { "_id": 1,
+        "name": "user 1"
+      },
+      { "_id": 2,
+        "name": "user 2"
+      },
+      { "_id": 3,
+        "name": "user 3"
+      }
+    ]
+  }

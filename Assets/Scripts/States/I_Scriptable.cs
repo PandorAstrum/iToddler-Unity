@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace PandorAstrum.States
 {
+
 	public interface I_Scriptable
 	{
 		string name { get;}
